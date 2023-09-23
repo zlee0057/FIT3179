@@ -19,18 +19,18 @@
         "fields": ["value"]
       }
     },
-    {"calculate": "datum.Active + 0.1", "as": "Active Cases"}
+    {"calculate": "datum.value + 0.1", "as": "Net Migration Flow"}
   ],
   "mark": {"type": "geoshape"},
   "encoding": {
     "color": {
-      "field": "value",
+      "field": "Net Migration Flow",
       "type": "quantitative",
       "scale": {"type": "log"}
     },
     "tooltip": [
       {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-      {"field": "value", "type": "quantitative"}
+      {"field": "Net Migration Flow", "type": "quantitative"}
     ]
   }
 }
