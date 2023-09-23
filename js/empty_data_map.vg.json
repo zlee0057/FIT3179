@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Migration Flow of Countries (2021)",
-  "width": 800,
-  "height": 500,
+  "width": 1000,
+  "height": 750,
   "data": {
     "url": "https://raw.githubusercontent.com/ExumZ/FIT3179-Week-9-Homework/main/js/ne_110m_admin_0_countries.topojson",
     "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
@@ -23,12 +23,12 @@
     {
       "transform": [
         {
-          "lookup": "properties.NAME",
+          "lookup": "properties.GU_A3",
           "from": {
             "data": {
-              "url": "https://github.com/ExumZ/FIT3179-Week-9-Homework/raw/main/data/migration_data_2021.csv"
+              "url": "https://raw.githubusercontent.com/ExumZ/FIT3179-Week-9-Homework/main/data/migration_data_2021.csv"
             },
-            "key": "country_name",
+            "key": "country_code",
             "fields": ["value"]
           }
         }
@@ -40,7 +40,7 @@
           "type": "quantitative",
           "scale": {
             "type": "threshold",
-            "domain": [10000, 100000, 500000],
+            "domain": [-500000, 0, 500000],
             "range": ["#fdbe85", "#fd8d3c", "#e6550d", "#a63603"]
           }
         },

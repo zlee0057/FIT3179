@@ -1,32 +1,36 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Migration Flow of Countries (2021)",
-  "width": 800,
-  "height": 400,
+  "width": 1000,
+  "height": 750,
   "projection": {"type": "equalEarth"},
   "data": {
-    "url": "https://github.com/ExumZ/FIT3179-Week-9-Homework/raw/main/js/ne_110m_admin_0_countries.topojson",
+    "url": "https://raw.githubusercontent.com/ExumZ/FIT3179-Week-9-Homework/main/js/ne_110m_admin_0_countries.topojson",
     "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
   },
   "transform": [
     {
-      "lookup": "properties.NAME",
+      "lookup": "properties.GU_A3",
       "from": {
         "data": {
-          "url": "https://github.com/ExumZ/FIT3179-Week-9-Homework/raw/main/js/ne_110m_admin_0_countries.topojson"
+          "url": "https://raw.githubusercontent.com/ExumZ/FIT3179-Week-9-Homework/main/data/migration_data_2021.csv"
         },
-        "key": "country_name",
+        "key": "country_code",
         "fields": ["value"]
       }
     },
-    {"calculate": "datum.value + 0.1", "as": "Net Migration Flow"}
+    {"calculate": "datum.value", "as": "Net Migration Flow"}
   ],
-  "mark": {"type": "geoshape"},
+  "mark": {"type": "geoshape", "stroke": "white"},
   "encoding": {
     "color": {
       "field": "Net Migration Flow",
       "type": "quantitative",
-      "scale": {"type": "log"}
+      "scale": {
+        "type": "threshold",
+        "domain": [-100000, -50000, 0, 50000, 100000],
+        "domainMid": 0
+      }
     },
     "tooltip": [
       {"field": "properties.NAME", "type": "nominal", "title": "Country"},
